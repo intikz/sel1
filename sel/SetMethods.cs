@@ -17,31 +17,19 @@ namespace sel
 
         //EnterText (element,value,type)
         //library methods should be static
-        public static void EnterText(string element, string value, string elementtype)
+        public static void EnterText(IWebElement element, string value)
         {
-            if (elementtype == "Id" || elementtype == "id")
-                driver.FindElement(By.Id(element)).SendKeys(value);
-            if (elementtype == "Name" || elementtype == "name")
-                driver.FindElement(By.Name(element));
+            element.SendKeys(value);
         }
 
-        public static void Click(string element, string elementtype)
+        public static void Click(IWebElement element)
         {
-            if (elementtype == "Id" || elementtype == "id")
-                driver.FindElement(By.Id(element)).Click();
-            if (elementtype == "Name" || elementtype == "name")
-                driver.FindElement(By.Name(element));
-            if (elementtype == "Button" || elementtype == "button")
-                driver.FindElement(By.CssSelector(element));
+            element.Click();
         }
 
-        public static void SelectDropDown(string element, string value, string elementtype)
+        public static void SelectDropDown(IWebElement element, string value)
         {
-            // SelectElement selElement = new SelectElement();
-            if (elementtype == "Id" || elementtype == "id")
-                new SelectElement(driver.FindElement(By.Id(element))).SelectByValue(value);
-            if (elementtype == "Name" || elementtype == "name")
-                new SelectElement(driver.FindElement(By.Name(element))).SelectByValue(value);
+            new SelectElement(element).SelectByText(value);
         }
     }
 }

@@ -15,43 +15,55 @@ namespace sel
         IWebDriver driver;
         static void Main(string[] args)
         {
-            //test
+
         }
 
         [SetUp]
         public void Initialize()
         {
             //create reference as global variable
-            
+
             Props.driver = new ChromeDriver();
             driver = Props.driver;
             //open browser
+            //driver.Navigate().GoToUrl("https://demosite.executeautomation.com/Login.html");
             driver.Navigate().GoToUrl("https://demosite.executeautomation.com/index.html");
             Console.WriteLine("abri la url");
         }
 
         [Test]
-        public void ExecuteTest()
+
+        public void login()
         {
-            //EnterText (element,value,type)
-            SetMethods.EnterText("FirstName", "hiii","id");
-            string firstName = GetMethods.GetText( "FirstName", "id");
-            Console.WriteLine("escribi: " + firstName);
-
-            // hay que pasarle la instancia del driver tmb
-
-            SetMethods.SelectDropDown("TitleId", "2", "id");            
-            Console.WriteLine("seleccione: " + GetMethods.GetText("TitleId", "id"));
-                        
+            loginObj pageLogin = new loginObj(); //initialize page and all its objects
+            pom pageGeneral = pageLogin.Login("ini", "ini");
+            pageGeneral.FillForm("ruby"); 
         }
 
-        public void TestClick()
+        [Test]
+        public void escribir()
         {
-            SetMethods.Click("Save", "name");
+            pom page = new pom(); //initialize page and all its objects
 
-            SetMethods.Click("generate", "name");
+            page.txtName.SendKeys("hello worlds");
+        }
+
+        [Test]
+        public void TestClick() //este falla bien porque toca el boton que tira alert
+        {
+            pom page = new pom();
+            page.btnGen.Click();
             Console.WriteLine("clickie");
         }
+
+        //[Test]
+        //public void oldTestClick()
+        //{
+        //    SetMethods.Click("Save", PropertyType.Name);
+
+        //    SetMethods.Click("generate", PropertyType.Name);
+        //    Console.WriteLine("clickie");
+        //}
 
         [TearDown]
         public void CleanUp()
@@ -60,27 +72,39 @@ namespace sel
             Console.WriteLine("cerre browser");
         }
 
+        //public void primitivo()
+        //{
+        ////EnterText (element,value,type)
+        //SetMethods.EnterText("FirstName", "hiii", PropertyType.Id);
+        //string firstName = GetMethods.GetText( "FirstName", PropertyType.Id);
+        //Console.WriteLine("escribi: " + firstName);
 
-        public void old()
-        {
-            //create reference as global variable
-            IWebDriver driver = new ChromeDriver();
+        //// hay que pasarle la instancia del driver tmb
 
-            //open browser
-            driver.Navigate().GoToUrl("https://demosite.executeautomation.com/index.html");
-            Console.WriteLine("abri la url");
+        //SetMethods.SelectDropDown("TitleId", "2", PropertyType.Id);            
+        //Console.WriteLine("seleccione: " + GetMethods.GetText("TitleId", PropertyType.Id));
+        //}
 
-            //find element
-            IWebElement element = driver.FindElement(By.Name("q"));
+        //public void old()
+        //{
+        //    //create reference as global variable
+        //    IWebDriver driver = new ChromeDriver();
 
-            //do the thing
-            element.SendKeys("hello world");
-            Console.WriteLine("hice el test");
+        //    //open browser
+        //    driver.Navigate().GoToUrl("http:/www.google.com");
+        //    Console.WriteLine("abri la url");
 
-            //stahp
-            driver.Close();
-            Console.WriteLine("cerre browser");
-        }
+        //    //find element
+        //    IWebElement element = driver.FindElement(By.Name("q"));
+
+        //    //do the thing
+        //    element.SendKeys("hello world");
+        //    Console.WriteLine("hice el test");
+
+        //    //stahp
+        //    driver.Close();
+        //    Console.WriteLine("cerre browser");
+        //}
 
 
 

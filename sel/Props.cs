@@ -7,8 +7,18 @@ using System.Threading.Tasks;
 
 namespace sel
 {
-    class Props
+    //strongly typed
+    enum PropertyType
     {
+        Id,
+        Name,
+        LinkText,
+        CssName,
+        ClassName
+    }
+
+    class Props
+    {     
         //auto implemented property
         public static IWebDriver driver { get; set; }
     }
