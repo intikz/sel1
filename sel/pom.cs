@@ -5,8 +5,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-//using FindsByAttribute = OpenQA.Selenium.Support.PageObjects.FindsByAttribute;
 using PageFactory = OpenQA.Selenium.Support.PageObjects.PageFactory;
+//using FindsByAttribute = OpenQA.Selenium.Support.PageObjects.FindsByAttribute;
 //using How = OpenQA.Selenium.Support.PageObjects.How;
 
 namespace sel
