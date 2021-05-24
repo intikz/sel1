@@ -35,10 +35,12 @@ namespace sel
 
         public void FillForm(string name)
         {
-            SetMethods.EnterText(txtName, name);
-            SetMethods.Click(btnSave);
+            //SetMethods.EnterText(txtName, name);  
+            //SetMethods.Click(btnSave);
+            
+            txtName.EnterText(name);
+            btnSave.Clicks();
             //txtName.SendKeys(name);
-            //btnSave.Click();
         }
 
     }

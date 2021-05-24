@@ -11,6 +11,11 @@ namespace sel
 {
     class Program
     {
+        //String currentURL = driver.Url;
+
+        const string urlGoogle = "http://www.google.com";
+        const string urlLogin = "https://demosite.executeautomation.com/Login.html";
+        const string urlForm = "https://demosite.executeautomation.com/index.html";
 
         IWebDriver driver;
         static void Main(string[] args)
@@ -18,52 +23,49 @@ namespace sel
 
         }
 
-        [SetUp]
+        [SetUp] //distintos setups para distintos tests
         public void Initialize()
         {
             //create reference as global variable
-
+              
+            Lib.PopulateInCollection(@"C:\Users\Inti AcostayLara\Source\Repos\sel1\Data.xlsx"); //iniciar para cada test
             Props.driver = new ChromeDriver();
             driver = Props.driver;
             //open browser
             //driver.Navigate().GoToUrl("https://demosite.executeautomation.com/Login.html");
-            driver.Navigate().GoToUrl("https://demosite.executeautomation.com/index.html");
-            Console.WriteLine("abri la url");
+            //driver.Navigate().GoToUrl("https://demosite.executeautomation.com/index.html");
+            //Console.WriteLine("abri la url");
         }
-
+        
         [Test]
 
         public void login()
-        {
+        {            
+            driver.Navigate().GoToUrl(urlLogin);
             loginObj pageLogin = new loginObj(); //initialize page and all its objects
-            pom pageGeneral = pageLogin.Login("ini", "ini");
-            pageGeneral.FillForm("ruby"); 
+            pom pageGeneral = pageLogin.Login(Lib.ReadData(1,"UserName"), Lib.ReadData(1, "Password")); //"ini", "ini"
+            //pageGeneral.FillForm(Lib.ReadData(1, "FirstName")); 
         }
 
         [Test]
         public void escribir()
         {
+            driver.Navigate().GoToUrl(urlForm);
             pom page = new pom(); //initialize page and all its objects
 
-            page.txtName.SendKeys("hello worlds");
+            //page.txtName.SendKeys("hello worlds");
+            page.FillForm(Lib.ReadData(1, "FirstName"));
         }
 
         [Test]
-        public void TestClick() //este falla bien porque toca el boton que tira alert
+        public void TestClick() 
         {
+            driver.Navigate().GoToUrl(urlForm);
             pom page = new pom();
-            page.btnGen.Click();
+            
+            page.btnSave.Click(); //btnGen = alert = error
             Console.WriteLine("clickie");
         }
-
-        //[Test]
-        //public void oldTestClick()
-        //{
-        //    SetMethods.Click("Save", PropertyType.Name);
-
-        //    SetMethods.Click("generate", PropertyType.Name);
-        //    Console.WriteLine("clickie");
-        //}
 
         [TearDown]
         public void CleanUp()
@@ -106,6 +108,15 @@ namespace sel
         //    Console.WriteLine("cerre browser");
         //}
 
+
+        //[Test]
+        //public void oldTestClick()
+        //{
+        //    SetMethods.Click("Save", PropertyType.Name);
+
+        //    SetMethods.Click("generate", PropertyType.Name);
+        //    Console.WriteLine("clickie");
+        //}
 
 
 

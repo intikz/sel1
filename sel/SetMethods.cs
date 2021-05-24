@@ -10,24 +10,26 @@ using OpenQA.Selenium.Support.UI;
 namespace sel
 {
     
-    class SetMethods
+    static class SetMethods //add static because extends
     {
         static IWebDriver driver = Props.driver;
         //enter text, click button, actions.
 
         //EnterText (element,value,type)
         //library methods should be static
-        public static void EnterText(IWebElement element, string value)
+
+        //this, makes EnterText an extended method, linq
+        public static void EnterText(this IWebElement element, string value)
         {
             element.SendKeys(value);
         }
 
-        public static void Click(IWebElement element)
+        public static void Clicks(this IWebElement element)
         {
             element.Click();
         }
 
-        public static void SelectDropDown(IWebElement element, string value)
+        public static void SelectDropDown(this IWebElement element, string value)
         {
             new SelectElement(element).SelectByText(value);
         }

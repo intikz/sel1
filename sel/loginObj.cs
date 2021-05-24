@@ -30,11 +30,12 @@ namespace sel
         public pom Login(string user, string pass)
         {
             //login
-            txtUserName.SendKeys(user);
-            txtPassword.SendKeys(pass);
+            txtUserName.EnterText(user);
+            txtPassword.EnterText(pass);
             //click
-            btnLogin.Submit();
+            btnLogin.Clicks(); // toma unos segundos cargar nueva pagina
 
+            
             return new pom(); //page obj model // will initialize and return page
         }
     }
